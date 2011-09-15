@@ -9,6 +9,7 @@ import nl.uva.mas.amm.pursuit.Agent;
 public class Predator
   extends Agent
 {
+	//Some strange variable..
   int xp[];
   int yp[];
   int nMoveDirection;
