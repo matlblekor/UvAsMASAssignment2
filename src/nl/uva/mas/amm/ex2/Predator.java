@@ -67,7 +67,7 @@ public class Predator
       if( i == 1 ) x = Integer.parseInt( tok.nextToken() );  // 2nd = x coord
       if( i == 2 ) y = Integer.parseInt( tok.nextToken() );  // 3rd = y coord
       if( i == 2 )
-      {	
+      {
 
 		// gather information about the 2 prays relative positions
       	if (strName.equals("prey")) {
