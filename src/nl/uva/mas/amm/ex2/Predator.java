@@ -12,11 +12,11 @@ public class Predator extends Agent {
 	// List of position arrays, where index 0 is x and index 1 is y
 	List<Position> preys;
 	List<Position> predators;
-	Position targetPos;
 
 	int nMoveDirection;
 	int predatorRole = -1;
 	private Integer preyToChase;
+	private Map<Integer, Position> targetPos;
 
 	public Predator() {
 
@@ -86,19 +86,19 @@ public class Predator extends Agent {
 					predators.add(new Position(x, y));
 				}
 
-				System.out.println(strName + " seen at (" + x + ", " + y + ")");
+				//System.out.println(strName + " seen at (" + x + ", " + y + ")");
 			}
 			i = (i + 1) % 3;
 		}
 
 		// Index of the prey we are going for
-		if (preyToChase == null) {
-			preyToChase = Helper.GetClosestPrey(preys, predators);
-			Collections.sort(predators);
-			predatorRole = Helper.GetRoleOfAgent(predators);
-		}
-		targetPos = Helper.GetTargetPosition(predatorRole, preyToChase, preys);
-		nMoveDirection = Helper.GetMoveDirection(targetPos);
+		preyToChase = Helper.GetClosestPrey(preys, predators);
+		System.out.println("Chasing Pray: " + preys.get(preyToChase).toString());
+
+		Collections.sort(predators);
+		predatorRole = Helper.GetRoleOfAgent(predators);		
+		targetPos = Helper.GetTargetPosition(preyToChase, preys);
+		nMoveDirection = Helper.GetMoveDirection(targetPos, predatorRole, predators);
 
 		/*
 		 * 
@@ -132,8 +132,6 @@ public class Predator extends Agent {
 		 * the Y axis if (targety < 0 && blocked[1] != 1) { nMoveDirection = 1;
 		 * } else { if (blocked[0] != 1) { nMoveDirection = 0; } } } }
 		 */
-		System.out.println("Target:" + " seen at (" + targetPos.x + ", "
-				+ targetPos.y + ") " + nMoveDirection);
 
 		// System.out.println( "Pray 1:" + " seen at (" + xp[0] + ", " + yp[0] +
 		// ")" );
