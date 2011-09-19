@@ -87,19 +87,21 @@ public class Helper {
 		Position currentAgentMovePosition = movePositionMap.get(predatorRole);
 		
 		if(currentAgentMovePosition.x != 0 && currentAgentMovePosition.y == 0)
-			if(currentAgentMovePosition.x > 0)
+			if(currentAgentMovePosition.x < 0)
 				return 2;
 			else
 				return 3;
 		else if(currentAgentMovePosition.x == 0 && currentAgentMovePosition.y != 0)
 		{
-			if(currentAgentMovePosition.y > 0)
+			if(currentAgentMovePosition.y < 0)
 				return 0;
 			else
 				return 1;			
 		}
 		else
-			throw new RuntimeException("Should not happen");
+			//throw new RuntimeException("Should not happen");
+			//Don't move
+			return 4;
 		/*
 		if (targetPos.x > 0 && targetPos.y > 0)
 			return Math.random() > 0.5 ? 0 : 2;
@@ -171,7 +173,7 @@ public class Helper {
 		}
 		else
 		{
-			throw new RuntimeException("Should not happen");
+			//throw new RuntimeException("Should not happen");
 		}
 		
 		return positions;

@@ -86,13 +86,15 @@ public class Predator extends Agent {
 					predators.add(new Position(x, y));
 				}
 
-				//System.out.println(strName + " seen at (" + x + ", " + y + ")");
+				System.out.println(strName + " seen at (" + x + ", " + y + ")");
 			}
 			i = (i + 1) % 3;
 		}
 
 		// Index of the prey we are going for
-		preyToChase = Helper.GetClosestPrey(preys, predators);
+		if(preyToChase == null)
+			preyToChase = Helper.GetClosestPrey(preys, predators);
+		
 		System.out.println("Chasing Pray: " + preys.get(preyToChase).toString());
 
 		Collections.sort(predators);
