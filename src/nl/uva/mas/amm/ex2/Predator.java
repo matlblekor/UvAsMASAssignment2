@@ -86,7 +86,7 @@ public class Predator extends Agent {
 					predators.add(new Position(x, y));
 				}
 
-				System.out.println(strName + " seen at (" + x + ", " + y + ")");
+				//System.out.println(strName + " seen at (" + x + ", " + y + ")");
 			}
 			i = (i + 1) % 3;
 		}
@@ -95,12 +95,14 @@ public class Predator extends Agent {
 		if(preyToChase == null)
 			preyToChase = Helper.GetClosestPrey(preys, predators);
 		
-		System.out.println("Chasing Pray: " + preys.get(preyToChase).toString());
+		//System.out.println("Chasing Pray: " + preys.get(preyToChase).toString());
 
 		Collections.sort(predators);
 		predatorRole = Helper.GetRoleOfAgent(predators);		
 		targetPos = Helper.GetTargetPosition(preyToChase, preys);
 		nMoveDirection = Helper.GetMoveDirection(targetPos, predatorRole, predators);
+		
+		System.out.println(predatorRole + ": " + Helper.collisionMap);
 
 		/*
 		 * 
@@ -177,7 +179,8 @@ public class Predator extends Agent {
 	public void collisionOccured() {
 		// this method is called when a collision occured and can be used to
 		// reinitialize some variables
-		System.out.println("COLLISION OCCURED\n");
+		System.out.println("COLLISION OCCURED");
+		System.out.println(Helper.collisionMap + "\n");
 	}
 
 	/**

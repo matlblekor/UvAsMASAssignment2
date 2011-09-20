@@ -10,6 +10,9 @@ import nl.uva.mas.amm.common.Position;
 
 public class Helper {
 
+	public static HashMap<String, Integer> collisionMap;
+	public static HashMap<Integer, Position> movePositionMap;
+
 	public static int GetClosestPrey(List<Position> preys,
 			List<Position> predators) {
 		int preyToChase = 0;
@@ -55,32 +58,42 @@ public class Helper {
 		Position targetPrey = preys.get(preyToChase);
 		Map<Integer, Position> targetPositions = new HashMap<Integer, Position>();
 		
+		
 		targetPositions.put(0, new Position(targetPrey.x, targetPrey.y - 1));
 		targetPositions.put(1, new Position(targetPrey.x - 1, targetPrey.y));
 		targetPositions.put(2, new Position(targetPrey.x + 1, targetPrey.y));
 		targetPositions.put(3, new Position(targetPrey.x, targetPrey.y + 1));
 		
+		
+		/*
+		targetPositions.put(0, new Position(targetPrey.x, targetPrey.y));
+		targetPositions.put(1, new Position(targetPrey.x, targetPrey.y));
+		targetPositions.put(2, new Position(targetPrey.x, targetPrey.y));
+		targetPositions.put(3, new Position(targetPrey.x, targetPrey.y));
+		*/
 		return targetPositions;
 	}
 
 	public static int GetMoveDirection(Map<Integer, Position> targetPos, int predatorRole, List<Position> predators) {
-		Map<String, Integer> collisionMap = new HashMap<String, Integer>();
-		Map<Integer, Position> movePositionMap = new HashMap<Integer, Position>();
+		collisionMap = new HashMap<String, Integer>();
+		movePositionMap = new HashMap<Integer, Position>();
 		
 		for(Position predator : predators)
 		{
 			int predatorNumber = predators.indexOf(predator);
-			Stack<Position> movePositions = getMovePosition(targetPos.get(predatorNumber), predator);
+			Stack<Position> movePositions = getMovePosition(targetPos.get(predatorNumber), predator);	
 			
 			while(true)
 			{
 				Position movePosition = movePositions.pop();
-				if(!collisionMap.containsKey(movePosition))
+//				if(!collisionMap.containsKey(movePosition.toString()))
 				{
 					collisionMap.put(movePosition.toString(), predatorNumber);
 					movePositionMap.put(predatorNumber, movePosition);
 					break;
 				}
+//				else
+//					System.out.println("####Collision found");
 			}
 		}
 		
